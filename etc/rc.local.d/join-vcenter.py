@@ -75,7 +75,7 @@ def main():
     tmp.close()
 
     # Retrieve ESXi IP Address
-    cmd = "grep HostIPAddr /etc/vmware/esx.conf | awk \'{print $3}\'"
+    cmd = "esxcli network ip interface ipv4 get | grep -E \'vmk[0-9]\' | awk \'{print $2}\'"
     tmp = os.popen(cmd)
     esxHostname = (tmp.readline()).strip().replace('"','')
     tmp.close()
